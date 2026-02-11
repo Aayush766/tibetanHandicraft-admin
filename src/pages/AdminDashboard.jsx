@@ -4,6 +4,7 @@ import {
   CubeIcon,
   EnvelopeIcon,
   MapPinIcon,
+  Squares2X2Icon,
 } from "@heroicons/react/24/outline";
 
 export default function AdminDashboard() {
@@ -51,7 +52,38 @@ export default function AdminDashboard() {
           desc="Edit phone, email, location and Google map"
           path="/admin-contact-settings"
         />
-        
+
+        <Card
+          icon={SwatchIcon}
+          title="Product Showcase CMS"
+          desc="Edit stacked gallery, text, button and visuals"
+          path="/admin-product-showcase"
+        />
+
+        <Card
+          icon={SwatchIcon}
+          title="Testimonials CMS"
+          desc="Drag, resize and edit reviews visually"
+          path="/admin-testimonials"
+        />
+
+        {/* ✅ NEW */}
+        <Card
+          icon={Squares2X2Icon}
+          title="Footer CMS"
+          desc="Edit socials, links, brand text and company info"
+          path="/admin-footer"
+        />
+
+
+        <Card
+  icon={SwatchIcon}
+  title="About Page CMS"
+  desc="Edit heritage story, images and philosophy"
+  path="/admin-about"
+/>
+
+
       </div>
     </div>
   );

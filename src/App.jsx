@@ -9,6 +9,10 @@ import AdminInquiries from "./pages/AdminInquiries";
 import AdminContactSettings from "./pages/AdminContactSettings";
 
 import AdminProtectedRoute from "./components/AdminProtectedRoute";
+import AdminProductShowcase from "./pages/AdminProductShowcase";
+import AdminTestimonials from "./pages/AdminTestimonials";
+import AdminFooter from "./pages/AdminFooter";
+import AdminAbout from "./pages/AdminAbout";
 
 function App() {
   return (
@@ -67,6 +71,24 @@ function App() {
             </AdminProtectedRoute>
           }
         />
+
+        <Route path="/admin-product-showcase" element={<AdminProductShowcase />} />
+        <Route path="/admin-footer" element={<AdminFooter />} />
+          <Route
+  path="/admin-about"
+  element={
+    <AdminProtectedRoute>
+      <AdminAbout />
+    </AdminProtectedRoute>
+  }
+/>
+
+          <Route
+  path="/admin-testimonials"
+  element={<AdminTestimonials />}
+/>
+
+
 
         {/* Default */}
         <Route path="/" element={<Navigate to="/admin-login" />} />

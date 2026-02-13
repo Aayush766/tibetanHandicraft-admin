@@ -69,10 +69,25 @@ export default function ProductStudio() {
 
   const fetchProducts = async () => {
     try {
-      const res = await API.get("/products");
+      const res = await API.get("http://localhost:5000/api/products");
       setProducts(res.data);
     } catch (err) { console.error(err); }
   };
+
+  const resetProducts = async () => {
+  if (!window.confirm("Reset archive to default products?")) return;
+
+  try {
+    await API.post("http://localhost:5000/api/products/reset");
+    setEditingProduct(null);
+    fetchProducts();
+    alert("Default products restored.");
+  } catch (err) {
+    console.error(err);
+    alert("Reset failed");
+  }
+};
+
 
   const calculateDiscount = (curr, old) => {
     if (!old || old <= curr) return null;
@@ -87,7 +102,7 @@ export default function ProductStudio() {
     formData.append("image", file);
 
     try {
-      const res = await API.post("/products/upload", formData);
+      const res = await API.post("http://localhost:5000/api/products/upload", formData);
       if (type === "main") {
         setEditingProduct({ ...editingProduct, image: res.data.url });
       } else {
@@ -99,18 +114,33 @@ export default function ProductStudio() {
   };
 
   const saveProduct = async () => {
-    try {
-      await API.post("/products/upsert", editingProduct);
-      setEditingProduct(null);
-      fetchProducts();
-      alert("Archive Synchronized.");
-    } catch (err) { alert("Save Error"); }
-  };
+  if (!editingProduct.image) {
+    alert("Please upload a cover image before saving.");
+    return;
+  }
+
+  try {
+    await API.post("http://localhost:5000/api/products/upsert", editingProduct);
+    setEditingProduct(null);
+    fetchProducts();
+    alert("Archive Synchronized.");
+  } catch (err) {
+    alert("Save Error");
+  }
+};
+
+const canSave =
+  editingProduct?.title &&
+  editingProduct?.image &&
+  editingProduct?.category &&
+  editingProduct?.description &&
+  editingProduct?.sku;
+
 
   const deleteProduct = async (id) => {
     if (!window.confirm("Remove this masterpiece from the archives?")) return;
     try {
-      await API.delete(`/products/${id}`);
+      await API.delete(`http://localhost:5000/api/products/${id}`);
       setEditingProduct(null);
       fetchProducts();
     } catch (err) { alert("Delete failed"); }
@@ -141,22 +171,48 @@ export default function ProductStudio() {
     setSizeInput("");
   };
 
+  
+
   return (
     <div className="min-h-screen bg-[#FDFCFB] text-stone-900 font-sans">
       {/* NAVIGATION */}
       <nav className="border-b border-stone-200 bg-white/80 backdrop-blur-md sticky top-0 z-50 px-8 py-4 flex justify-between items-center">
         <h1 className="text-xl font-bold tracking-tighter italic font-serif text-stone-800">Studio Archives</h1>
-        <button 
-          onClick={() => setEditingProduct({ 
-            title: "", price: 0, oldPrice: 0, category: "Archive", gallery: [], 
-            colors: [], sizes: [], description: "", 
-            sku: `ART-${Date.now()}`, tags: [], rating: 5, reviewsCount: 0,
-            tag: "new", tagColor: "#b45309"
-          })}
-          className="bg-stone-900 text-white px-6 py-2 rounded-full text-[10px] font-bold uppercase tracking-widest hover:bg-amber-800 transition-all flex items-center gap-2"
-        >
-          <PlusIcon className="w-4 h-4" /> Create Masterpiece
-        </button>
+        
+        <div className="flex gap-3">
+    {/* RESET BUTTON */}
+    <button
+      onClick={resetProducts}
+      className="border border-red-300 text-red-600 px-6 py-2 rounded-full text-[10px] font-bold uppercase tracking-widest hover:bg-red-50 transition-all"
+    >
+      Reset Defaults
+    </button>
+        <button
+  onClick={() =>
+    setEditingProduct({
+      title: "",
+      image: "",
+      gallery: [],
+      price: 0,
+      oldPrice: 0,
+      category: "",
+      sku: `ART-${Date.now()}`,
+      description: "",
+      tags: [],
+      colors: [],
+      sizes: [],
+      rating: 5,
+      reviewsCount: 0,
+      tag: "",
+      tagColor: "#b45309",
+    })
+  }
+  className="bg-stone-900 text-white px-6 py-2 rounded-full text-[10px] font-bold uppercase tracking-widest hover:bg-amber-800 transition-all flex items-center gap-2"
+>
+  <PlusIcon className="w-4 h-4" /> Create Masterpiece
+</button>
+</div>
+
       </nav>
 
       <main className="max-w-[1700px] mx-auto p-8 grid grid-cols-12 gap-10">
@@ -394,10 +450,25 @@ export default function ProductStudio() {
 
                 {/* SAVE/DELETE ACTIONS */}
                 <div className="flex justify-between items-center pt-8 border-t border-stone-100">
-                  <button onClick={() => deleteProduct(editingProduct._id)} className="flex items-center gap-2 text-red-400 hover:text-red-600 text-[10px] font-bold uppercase tracking-widest transition-all"><TrashIcon className="w-4 h-4" /> Delete Artifact</button>
+                  <button
+  disabled={!editingProduct?._id}
+  onClick={() => editingProduct?._id && deleteProduct(editingProduct._id)}
+  className="flex items-center gap-2 text-red-400 hover:text-red-600 text-[10px] font-bold uppercase tracking-widest transition-all"
+>Delete Artifact</button>
                   <div className="flex gap-4">
                     <button onClick={() => setEditingProduct(null)} className="text-[10px] font-bold uppercase text-stone-400 hover:text-stone-900">Discard</button>
-                    <button onClick={saveProduct} className="bg-stone-900 text-amber-500 px-12 py-4 rounded-2xl font-black text-[10px] uppercase tracking-[0.3em] shadow-xl hover:bg-black transition-all">Sync to Archive</button>
+                    <button
+  disabled={!canSave}
+  onClick={saveProduct}
+  className={`px-12 py-4 rounded-2xl font-black text-[10px] uppercase tracking-[0.3em]
+    ${canSave
+      ? "bg-stone-900 text-amber-500 hover:bg-black"
+      : "bg-stone-300 text-stone-500 cursor-not-allowed"
+    }`}
+>
+  Sync to Archive
+</button>
+
                   </div>
                 </div>
               </div>

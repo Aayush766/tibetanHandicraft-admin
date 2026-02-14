@@ -15,19 +15,52 @@ import {
 const DEFAULT_SHOWCASE_DATA = {
   label: "Global Archive",
   heading: "50M+ \n Product Sold",
-  description: "An exclusive collection of 50M+ artifacts, preserved through time and delivered to your space.",
+  description:
+    "An exclusive collection of 50M+ artifacts, preserved through time and delivered to your space.",
   buttonText: "Discover All",
   buttonLink: "/discover",
   buttonTextColor: "#ffffff",
   buttonBgColor: "#1c1917",
+
   sliderItems: [
-    { id: "01", category: "Pottery", title: "Hand-Thrown Vessel", image: "https://res.cloudinary.com/da3udp8hz/image/upload/v1770806057/Pot_txg2y6.png", imagePosition: "center" },
-    { id: "02", category: "Sculpture", title: "Ancient Deity", image: "https://res.cloudinary.com/da3udp8hz/image/upload/v1770806057/Statues_qy2z5m.png", imagePosition: "center" },
-    { id: "03", category: "Artifact", title: "Ritual Bowl", image: "https://res.cloudinary.com/da3udp8hz/image/upload/v1770806057/Bowl_as3p1q.png", imagePosition: "center" },
-    { id: "04", category: "Mask", title: "Ceremonial Face", image: "https://res.cloudinary.com/da3udp8hz/image/upload/v1770806057/item_v4f8u2.png", imagePosition: "center" },
-    { id: "05", category: "Metalware", title: "Temple Bell", image: "https://res.cloudinary.com/da3udp8hz/image/upload/v1770806057/decore_z8j9k1.png", imagePosition: "center" },
-  ]
+    {
+      id: "01",
+      category: "Pottery",
+      title: "Hand-Thrown Vessel",
+      image: "/Pot.png",
+      imagePosition: "center",
+    },
+    {
+      id: "02",
+      category: "Sculpture",
+      title: "Ancient Deity",
+      image: "/Statues.png",
+      imagePosition: "center",
+    },
+    {
+      id: "03",
+      category: "Artifact",
+      title: "Ritual Bowl",
+      image: "/Bowl.png",
+      imagePosition: "center",
+    },
+    {
+      id: "04",
+      category: "Mask",
+      title: "Ceremonial Face",
+      image: "/item.png",
+      imagePosition: "center",
+    },
+    {
+      id: "05",
+      category: "Metalware",
+      title: "Temple Bell",
+      image: "/decore.png",
+      imagePosition: "center",
+    },
+  ],
 };
+
 
 /** * --- LIVE PREVIEW COMPONENT --- */
 function ShowcasePreview({ data }) {

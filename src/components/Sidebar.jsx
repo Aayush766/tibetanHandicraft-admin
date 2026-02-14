@@ -7,9 +7,13 @@ import {
   EnvelopeIcon,
   MapPinIcon,
   ArrowRightOnRectangleIcon,
-  SparklesIcon
+  SparklesIcon,
+  
 } from "@heroicons/react/24/outline";
 import logo from "../assets/logo.png";
+import { Layers } from "lucide-react";
+
+
 
 const Sidebar = () => {
   const navigate = useNavigate();
@@ -37,6 +41,12 @@ const Sidebar = () => {
         { name: "Showcase", icon: SparklesIcon, path: "/admin-product-showcase" },
         { name: "Testimonials", icon: SwatchIcon, path: "/admin-testimonials" },
         { name: "About", icon: SwatchIcon, path: "/admin-about" },
+        {
+  name: "Category Slider",
+  icon: Layers,
+  path: "/admin-category-slider",
+},
+
       ]
     },
     {

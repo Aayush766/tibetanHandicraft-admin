@@ -6,6 +6,7 @@ import {
   EnvelopeIcon,
   MapPinIcon,
   Squares2X2Icon,
+  LayersIcon
 } from "@heroicons/react/24/outline";
 import { Settings, LifeBuoy, LayoutDashboard } from "lucide-react";
 
@@ -47,6 +48,8 @@ const DashboardSidebar = ({ notifications, handleNavigate }) => {
     { label: "Testimonials CMS", icon: SwatchIcon, path: "/admin-testimonials" },
     { label: "Footer CMS", icon: Squares2X2Icon, path: "/admin-footer" },
     { label: "About Page CMS", icon: SwatchIcon, path: "/admin-about" },
+    { label: "Category Slider CMS", icon: Layers, path: "/admin-category-slider" },
+
   ];
 
   return (

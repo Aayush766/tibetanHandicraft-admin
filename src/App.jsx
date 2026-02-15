@@ -17,6 +17,7 @@ import AdminDashboard from "./pages/AdminDashboard";
 
 // Layout
 import AdminLayout from "./components/AdminLayout";
+import ListedProducts from "./components/ListedProducts";
 
 function App() {
   return (
@@ -46,6 +47,7 @@ function App() {
           <Route path="/admin-footer" element={<AdminFooter />} />
           <Route path="/admin-about" element={<AdminAbout />} />
           <Route path="/admin-testimonials" element={<AdminTestimonials />} />
+          <Route path="/admin-products" element={<ListedProducts />} /> {/* New route for listed products */}
         </Route>
 
         {/* --- Fallbacks --- */}

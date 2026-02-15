@@ -20,7 +20,7 @@ function FooterPreview({ data }) {
             <div className="lg:col-span-4 space-y-8">
               <div className="relative w-[180px] h-[100px]">
                 <img
-                  src="/logoFooter.png"
+                  src="/logo.png"
                   className="object-contain w-full h-full"
                 />
               </div>

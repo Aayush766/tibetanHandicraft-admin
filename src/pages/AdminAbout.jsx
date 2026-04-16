@@ -34,7 +34,7 @@ export default function AdminAbout() {
 
   // 1. Fetch Data from Backend
   const fetchData = () => {
-    axios.get("http://localhost:5000/api/about")
+    axios.get("https://thj-backend.onrender.com/api/about")
       .then((res) => setData(res.data || DEFAULT_ABOUT_DATA))
       .catch(() => setData(DEFAULT_ABOUT_DATA));
   };
@@ -61,7 +61,7 @@ export default function AdminAbout() {
     formData.append("image", file);
 
     try {
-      const res = await axios.post("http://localhost:5000/api/upload", formData);
+      const res = await axios.post("https://thj-backend.onrender.com/api/upload", formData);
       handleChange(path, res.data.url); // Updates path with Cloudinary URL
     } catch (err) {
       alert("Upload failed. Check backend/Cloudinary logs.");
@@ -73,7 +73,7 @@ export default function AdminAbout() {
   // 4. Save to Database
   const save = async () => {
     try {
-      await axios.put("http://localhost:5000/api/about", data);
+      await axios.put("https://thj-backend.onrender.com/api/about", data);
       alert("Changes saved to database!");
     } catch (err) {
       alert("Error saving data");
@@ -84,7 +84,7 @@ export default function AdminAbout() {
   const reset = async () => {
     if (!confirm("Reset to default? This will overwrite existing data.")) return;
     setData(DEFAULT_ABOUT_DATA);
-    await axios.put("http://localhost:5000/api/about", DEFAULT_ABOUT_DATA);
+    await axios.put("https://thj-backend.onrender.com/api/about", DEFAULT_ABOUT_DATA);
   };
 
   if (!data) return <div className="p-20 text-center font-serif italic text-2xl">Loading...</div>;

@@ -69,7 +69,7 @@ export default function ProductStudio() {
 
   const fetchProducts = async () => {
     try {
-      const res = await API.get("http://localhost:5000/api/products");
+      const res = await API.get("https://thj-backend.onrender.com/api/products");
       setProducts(res.data);
     } catch (err) { console.error(err); }
   };
@@ -78,7 +78,7 @@ export default function ProductStudio() {
   if (!window.confirm("Reset archive to default products?")) return;
 
   try {
-    await API.post("http://localhost:5000/api/products/reset");
+    await API.post("https://thj-backend.onrender.com/api/products/reset");
     setEditingProduct(null);
     fetchProducts();
     alert("Default products restored.");
@@ -102,7 +102,7 @@ export default function ProductStudio() {
     formData.append("image", file);
 
     try {
-      const res = await API.post("http://localhost:5000/api/products/upload", formData);
+      const res = await API.post("https://thj-backend.onrender.com/api/products/upload", formData);
       if (type === "main") {
         setEditingProduct({ ...editingProduct, image: res.data.url });
       } else {
@@ -120,7 +120,7 @@ export default function ProductStudio() {
   }
 
   try {
-    await API.post("http://localhost:5000/api/products/upsert", editingProduct);
+    await API.post("https://thj-backend.onrender.com/api/products/upsert", editingProduct);
     setEditingProduct(null);
     fetchProducts();
     alert("Archive Synchronized.");
@@ -140,7 +140,7 @@ const canSave =
   const deleteProduct = async (id) => {
     if (!window.confirm("Remove this masterpiece from the archives?")) return;
     try {
-      await API.delete(`http://localhost:5000/api/products/${id}`);
+      await API.delete(`https://thj-backend.onrender.com/api/products/${id}`);
       setEditingProduct(null);
       fetchProducts();
     } catch (err) { alert("Delete failed"); }

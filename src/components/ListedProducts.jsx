@@ -9,7 +9,7 @@ export default function ListedProducts() {
   const fetchProducts = async () => {
     try {
       setLoading(true);
-      const res = await API.get("http://localhost:5000/api/products");
+      const res = await API.get("https://thj-backend.onrender.com/api/products");
       setProducts(res.data);
     } catch (err) {
       console.error("Failed to fetch products");
@@ -25,7 +25,7 @@ export default function ListedProducts() {
   const handleDelete = async (id) => {
     if (!window.confirm("Are you sure you want to remove this item?")) return;
     try {
-      await API.delete(`http://localhost:5000/api/products/${id}`);
+      await API.delete(`https://thj-backend.onrender.com/api/products/${id}`);
       setProducts(products.filter((p) => p._id !== id));
       alert("Product removed");
     } catch (err) {

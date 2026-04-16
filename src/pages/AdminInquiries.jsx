@@ -13,7 +13,7 @@ export default function AdminInquiries() {
       setError("");
 
       const res = await axios.get(
-        "http://localhost:5000/api/contact/inquiries",
+        "https://thj-backend.onrender.com/api/contact/inquiries",
         { withCredentials: true }
       );
 
@@ -40,7 +40,7 @@ export default function AdminInquiries() {
   const sendReply = async (id) => {
     try {
       await axios.post(
-        "http://localhost:5000/api/contact/reply",
+        "https://thj-backend.onrender.com/api/contact/reply",
         { id, reply: replyText },
         { withCredentials: true }
       );

@@ -111,7 +111,7 @@ export default function AdminContactSettings() {
   const [fetching, setFetching] = useState(true);
 
   // Use absolute URL to fix the 404 issue you encountered
-  const BASE_URL = "http://localhost:5000/api/contact";
+  const BASE_URL = "https://thj-backend.onrender.com/api/contact";
 
   useEffect(() => {
     API.get(`${BASE_URL}/settings`)

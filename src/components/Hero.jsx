@@ -167,11 +167,13 @@ export default function AdvancedHeroAdmin() {
     });
   }, []);
 
-  const handleSlideChange = (idx, field, val) => {
-    const next = [...slides];
+ const handleSlideChange = (idx, field, val) => {
+  setSlides(prev => {
+    const next = [...prev];
     next[idx] = { ...next[idx], [field]: val };
-    setSlides(next);
-  };
+    return next;
+  });
+};
 
   const current = slides[activeIdx] || DEFAULT_SLIDES[0];
 
@@ -206,7 +208,27 @@ export default function AdvancedHeroAdmin() {
           }}>
             <SortableContext items={slides.map(s => s.order)} strategy={verticalListSortingStrategy}>
               {slides.map((s, i) => (
-                <SortableSlide key={s.order} slide={s} index={i} isActive={activeIdx === i} handleSlideChange={handleSlideChange} setFocusedIndex={setActiveIdx} deleteSlide={(idx) => setSlides(slides.filter((_, si) => si !== idx))} uploadImage={(e, idx) => handleSlideChange(idx, "image", URL.createObjectURL(e.target.files[0]))} />
+                <SortableSlide key={s.order} slide={s} index={i} isActive={activeIdx === i} handleSlideChange={handleSlideChange} setFocusedIndex={setActiveIdx} deleteSlide={(idx) => setSlides(slides.filter((_, si) => si !== idx))} uploadImage={async (e, idx) => {
+  const file = e.target.files[0];
+  if (!file) return;
+
+  const formData = new FormData();
+  formData.append("image", file);
+
+  try {
+    const res = await API.post("/upload", formData, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    });
+
+    const imageUrl = res.data.imageUrl;
+
+    handleSlideChange(idx, "image", imageUrl);
+  } catch (err) {
+    console.error("Upload failed", err);
+  }
+}} />
               ))}
             </SortableContext>
           </DndContext>

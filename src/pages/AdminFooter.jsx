@@ -86,20 +86,20 @@ export default function AdminFooter() {
   const [data, setData] = useState(null);
 
   const fetchData = () => {
-    axios.get("http://localhost:5000/api/footer")
+    axios.get("https://thj-backend.onrender.com/api/footer")
       .then(res => setData(res.data));
   };
 
   useEffect(fetchData, []);
 
   const save = async () => {
-    await axios.put("http://localhost:5000/api/footer", data);
+    await axios.put("https://thj-backend.onrender.com/api/footer", data);
     alert("Saved");
   };
 
   const reset = async () => {
     if (!confirm("Reset footer to default?")) return;
-    await axios.post("http://localhost:5000/api/footer/reset");
+    await axios.post("https://thj-backend.onrender.com/api/footer/reset");
     fetchData();
   };
 

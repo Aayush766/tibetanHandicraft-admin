@@ -1,5 +1,6 @@
 import axios from "axios";
 
 export const API = axios.create({
-  baseURL: "http://localhost:5000/api/hero",
+  baseURL: "https://thj-backend.onrender.com/api/hero",
+  withCredentials: true
 });

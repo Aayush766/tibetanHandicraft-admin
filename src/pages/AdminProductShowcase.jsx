@@ -155,7 +155,7 @@ export default function AdminProductShowcase() {
 
   const fetchData = async () => {
     try {
-      const res = await API.get("http://localhost:5000/api/product-showcase");
+      const res = await API.get("https://thj-backend.onrender.com/api/product-showcase");
       if (res.data && Object.keys(res.data).length > 0) {
         setData(res.data);
       } else {
@@ -170,7 +170,7 @@ export default function AdminProductShowcase() {
     if (!window.confirm("Reset to default archive collection?")) return;
     setLoading(true);
     try {
-        await API.post("http://localhost:5000/api/product-showcase/reset");
+        await API.post("https://thj-backend.onrender.com/api/product-showcase/reset");
         setData(DEFAULT_SHOWCASE_DATA); 
         alert("Reset successful!");
     } catch (err) {
@@ -212,7 +212,7 @@ export default function AdminProductShowcase() {
     formData.append("image", file);
     try {
       setLoading(true);
-      const res = await API.post("http://localhost:5000/api/products/upload", formData, {
+      const res = await API.post("https://thj-backend.onrender.com/api/products/upload", formData, {
         headers: { "Content-Type": "multipart/form-data" },
       });
       handleItemChange(idx, "image", res.data.url);
@@ -226,7 +226,7 @@ export default function AdminProductShowcase() {
   const save = async () => {
     try {
       setLoading(true);
-      await API.put("http://localhost:5000/api/product-showcase", data);
+      await API.put("https://thj-backend.onrender.com/api/product-showcase", data);
       alert("Archive Updated Successfully");
     } catch (err) {
       alert("Save failed: " + err.message);

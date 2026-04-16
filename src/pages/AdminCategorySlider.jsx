@@ -47,7 +47,7 @@ export default function AdminCategorySlider() {
 
   /* -------- FETCH -------- */
   useEffect(() => {
-    API.get("http://localhost:5000/api/category-slider")
+    API.get("https://thj-backend.onrender.com/api/category-slider")
       .then(res => {
         setData(res.data);
         setLoading(false);
@@ -97,7 +97,7 @@ export default function AdminCategorySlider() {
     fd.append("image", file);
 
     const res = await API.post(
-      "http://localhost:5000/api/category-slider/upload",
+      "https://thj-backend.onrender.com/api/category-slider/upload",
       fd
     );
 
@@ -106,7 +106,7 @@ export default function AdminCategorySlider() {
 
   /* -------- SAVE -------- */
   const save = async () => {
-    await API.put("http://localhost:5000/api/category-slider", data);
+    await API.put("https://thj-backend.onrender.com/api/category-slider", data);
     alert("Category Slider Saved");
   };
 
@@ -115,7 +115,7 @@ export default function AdminCategorySlider() {
     if (!confirm("Reset category slider to default data?")) return;
 
     const res = await API.post(
-      "http://localhost:5000/api/category-slider/reset"
+      "https://thj-backend.onrender.com/api/category-slider/reset"
     );
 
     setData(res.data);

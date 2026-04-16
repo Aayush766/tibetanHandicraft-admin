@@ -9,7 +9,7 @@ export default function AdminTestimonials() {
   /* ---------------- FETCH ---------------- */
   const fetchData = () => {
     axios
-      .get("http://localhost:5000/api/testimonials")
+      .get("https://thj-backend.onrender.com/api/testimonials")
       .then((res) => setItems(res.data.items));
   };
 
@@ -31,7 +31,7 @@ export default function AdminTestimonials() {
     formData.append("image", file);
 
     const res = await axios.post(
-      "http://localhost:5000/api/testimonials/upload",
+      "https://thj-backend.onrender.com/api/testimonials/upload",
       formData
     );
 
@@ -40,14 +40,14 @@ export default function AdminTestimonials() {
 
   /* ---------------- SAVE ---------------- */
   const save = async () => {
-    await axios.put("http://localhost:5000/api/testimonials", { items });
+    await axios.put("https://thj-backend.onrender.com/api/testimonials", { items });
     alert("Saved Layout Successfully");
   };
 
   /* ---------------- RESET ---------------- */
   const reset = async () => {
     if (!confirm("Reset testimonials to default layout?")) return;
-    await axios.post("http://localhost:5000/api/testimonials/reset");
+    await axios.post("https://thj-backend.onrender.com/api/testimonials/reset");
     fetchData();
   };
 

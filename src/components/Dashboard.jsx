@@ -49,6 +49,7 @@ const DashboardSidebar = ({ notifications, handleNavigate }) => {
     { label: "Footer CMS", icon: Squares2X2Icon, path: "/admin-footer" },
     { label: "About Page CMS", icon: SwatchIcon, path: "/admin-about" },
     { label: "Category Slider CMS", icon: Layers, path: "/admin-category-slider" },
+    { label: "Contact Card", icon: MapPinIcon, path: "/admin-contact-card" },
 
   ];
 
@@ -118,6 +119,7 @@ export default function AdminDashboard() {
           <Card icon={SwatchIcon} title="Testimonials" desc="Drag, resize and edit reviews visually" path="/admin-testimonials" />
           <Card icon={Squares2X2Icon} title="Footer CMS" desc="Edit socials, links, brand text and info" path="/admin-footer" />
           <Card icon={SwatchIcon} title="About Page CMS" desc="Edit heritage story, images and philosophy" path="/admin-about" />
+          
         </div>
       </main>
     </div>
